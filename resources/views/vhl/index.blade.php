@@ -3,16 +3,21 @@
 @section('title', 'VHL')
 
 @section('content_header')
-    <h1>VHL - Enlace de Salud Virtual</h1>
+    <div style="text-align: center; width: 100%;">
+        <h1 style="display: inline-block;">
+            <i class="fas fa-link"></i> VHL
+        </h1>
+    </div>
 @stop
 
 @section('css')
     <style>
         .vhl-wrap {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
         }
 
+        /* ====== TABS ====== */
         .vhl-toggle {
             display: flex;
             justify-content: center;
@@ -31,6 +36,11 @@
             font-size: .8rem;
             letter-spacing: .03em;
             cursor: pointer;
+            transition: all .2s;
+        }
+
+        .vhl-toggle-btn:hover {
+            background: #142c4d;
         }
 
         .vhl-toggle-btn.is-inactive {
@@ -41,6 +51,12 @@
             padding: .55rem .25rem;
         }
 
+        .vhl-toggle-btn.is-inactive:hover {
+            color: #0d2a4a;
+            text-decoration: none;
+        }
+
+        /* ====== CAMPOS DE BÚSQUEDA ====== */
         .vhl-campos {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -56,11 +72,13 @@
             border-radius: .5rem;
             padding: .75rem 1.1rem;
             font-size: 1rem;
+            transition: border-color .2s, box-shadow .2s;
         }
 
         .vhl-campo-id input:focus {
             outline: none;
             border-color: #4e73df;
+            box-shadow: 0 0 0 3px rgba(78, 115, 223, 0.15);
         }
 
         .vhl-fieldset {
@@ -86,8 +104,10 @@
             background: transparent;
             font-size: .95rem;
             padding: .2rem 0;
+            cursor: pointer;
         }
 
+        /* ====== BOTONES ====== */
         .vhl-buscar-wrap {
             text-align: center;
             margin: 1.5rem 0;
@@ -106,18 +126,119 @@
             letter-spacing: .03em;
             font-size: .85rem;
             cursor: pointer;
+            transition: background .15s, transform .1s, box-shadow .15s;
+            box-shadow: 0 3px 8px rgba(27, 58, 99, 0.2);
         }
 
         .vhl-btn-buscar:hover {
             background: #142c4d;
-            color: #fff;
+            transform: translateY(-1px);
+            box-shadow: 0 5px 12px rgba(27, 58, 99, 0.3);
         }
 
         .vhl-btn-buscar:disabled {
             opacity: .6;
-            cursor: default;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
 
+        /* ====== ESTADOS VACÍO / ERROR ====== */
+        .visor-empty {
+            text-align: center;
+            color: #6c757d;
+            padding: 2.5rem 1rem;
+            background: #f8fafc;
+            border-radius: .75rem;
+            border: 1px dashed #d0d7e2;
+        }
+
+        .visor-empty-icon {
+            font-size: 2.4rem;
+            margin-bottom: .75rem;
+            display: block;
+            color: #a0aec0;
+        }
+
+        .visor-error {
+            color: #b02a37;
+            border-color: #f5c2c7;
+            background: #fff5f5;
+        }
+
+        .visor-error .visor-empty-icon {
+            color: #dc3545;
+        }
+
+        .visor-panel {
+            background: #fff;
+            border-radius: .75rem;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e9edf4;
+        }
+
+        .visor-panel--light {
+            background: #f8fafc;
+            border-color: #e9edf4;
+        }
+
+        /* ====== TARJETA DE RESULTADOS (CI CARD) ====== */
+        .ci-card {
+            background: #fff;
+            border-radius: .75rem;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e9edf4;
+        }
+
+        .ci-card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.15rem 1.5rem;
+            border-bottom: 1px solid #e9edf4;
+            background: #f8fafc;
+            flex-wrap: wrap;
+        }
+
+        .ci-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #e2e8f0;
+            color: #1b3a63;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .ci-nombre {
+            display: block;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #0b1e33;
+        }
+
+        .ci-conteo {
+            color: #5a6a7e;
+            font-size: .85rem;
+            font-weight: 500;
+        }
+
+        .ci-card-body {
+            padding: 1.25rem 1.5rem 1.5rem;
+        }
+
+        .ci-empty {
+            text-align: center;
+            color: #6c757d;
+            padding: 2rem 1rem;
+        }
+
+        /* ====== LISTA DE RECURSOS ====== */
         .vhl-subtitulo {
             color: #495057;
             font-weight: 600;
@@ -131,6 +252,25 @@
             margin-bottom: 1.5rem;
             max-height: 320px;
             overflow-y: auto;
+            padding-right: .25rem;
+        }
+
+        .vhl-lista-recursos::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .vhl-lista-recursos::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .vhl-lista-recursos::-webkit-scrollbar-thumb {
+            background: #c1c7d0;
+            border-radius: 4px;
+        }
+
+        .vhl-lista-recursos::-webkit-scrollbar-thumb:hover {
+            background: #a0aec0;
         }
 
         .vhl-recurso {
@@ -143,10 +283,20 @@
             padding: .6rem .9rem;
             margin: 0;
             cursor: pointer;
+            transition: background .15s, border-color .15s;
         }
 
-        .vhl-recurso input {
+        .vhl-recurso:hover {
+            background: #eef2fd;
+            border-color: #d0d7e2;
+        }
+
+        .vhl-recurso input[type="checkbox"] {
             flex-shrink: 0;
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+            accent-color: #1b3a63;
         }
 
         .vhl-recurso-tipo {
@@ -163,13 +313,15 @@
         .vhl-recurso-texto {
             color: #212529;
             font-size: .9rem;
+            word-break: break-word;
         }
 
+        /* ====== CAMPOS DE EMISIÓN ====== */
         .vhl-campos-emision {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1rem;
-            margin-bottom: .5rem;
+            margin-bottom: 1.5rem;
         }
 
         .vhl-campos-emision label {
@@ -177,6 +329,7 @@
             font-size: .8rem;
             color: #6c757d;
             margin-bottom: .3rem;
+            font-weight: 500;
         }
 
         .vhl-campos-emision input {
@@ -184,8 +337,17 @@
             border: 1px solid #dee2e6;
             border-radius: .35rem;
             padding: .5rem .75rem;
+            font-size: .95rem;
+            transition: border-color .2s, box-shadow .2s;
         }
 
+        .vhl-campos-emision input:focus {
+            outline: none;
+            border-color: #4e73df;
+            box-shadow: 0 0 0 3px rgba(78, 115, 223, 0.12);
+        }
+
+        /* ====== QR RESULTADO ====== */
         .vhl-qr-card {
             text-align: center;
             margin-top: 1.5rem;
@@ -198,6 +360,8 @@
             border-radius: .5rem;
             padding: .75rem;
             background: #fff;
+            max-width: 100%;
+            height: auto;
         }
 
         .vhl-codigo {
@@ -219,6 +383,7 @@
             justify-content: center;
             gap: .75rem;
             margin-top: .75rem;
+            flex-wrap: wrap;
         }
 
         .vhl-copiar {
@@ -226,35 +391,39 @@
             align-items: center;
             gap: .4rem;
             background: transparent;
-            border: 1px solid #1b3a63;
+            border: 1.5px solid #1b3a63;
             color: #1b3a63;
-            border-radius: .35rem;
-            padding: .4rem 1rem;
+            border-radius: 30px;
+            padding: .4rem 1.2rem;
             font-size: .82rem;
             font-weight: 600;
             text-decoration: none;
             cursor: pointer;
+            transition: all .15s;
         }
 
         .vhl-copiar:hover {
             background: #1b3a63;
             color: #fff;
+            text-decoration: none;
         }
 
+        /* ====== SUBIR ARCHIVO ====== */
         .vhl-file-label {
             display: flex;
             align-items: center;
             gap: .6rem;
             height: 100%;
+            min-height: 60px;
             background: #fff;
-            border: 1px dashed #adb5bd;
+            border: 2px dashed #adb5bd;
             border-radius: .5rem;
             padding: .75rem 1.1rem;
             font-size: .9rem;
             color: #6c757d;
             cursor: pointer;
             margin: 0;
-            transition: border-color .15s, background-color .15s, color .15s;
+            transition: all .15s;
         }
 
         .vhl-file-label:hover {
@@ -273,14 +442,17 @@
             border-style: solid;
             border-color: #198754;
             color: #198754;
+            background: #f0fff4;
         }
 
         .vhl-file-label.is-error {
             border-style: solid;
             border-color: #dc3545;
             color: #dc3545;
+            background: #fff5f5;
         }
 
+        /* ====== PASOS DE VALIDACIÓN ====== */
         .vhl-pasos {
             list-style: none;
             padding: 0;
@@ -325,6 +497,7 @@
             margin-bottom: 0;
         }
 
+        /* ====== SPLIT LAYOUT ====== */
         .vhl-split {
             display: flex;
             align-items: stretch;
@@ -341,6 +514,7 @@
             margin-top: 1.25rem;
         }
 
+        /* ====== CÁMARA ====== */
         .vhl-camara-toggle {
             text-align: center;
             margin: -.75rem 0 1.5rem;
@@ -355,6 +529,11 @@
             text-decoration: underline;
             cursor: pointer;
             padding: .25rem;
+            transition: color .15s;
+        }
+
+        .vhl-link-camara:hover {
+            color: #0d2a4a;
         }
 
         .vhl-camara-panel {
@@ -378,11 +557,51 @@
             margin-top: .75rem;
             font-size: .85rem;
             color: #6c757d;
+            flex-wrap: wrap;
         }
 
+        /* ====== RESPONSIVE ====== */
         @media (max-width: 767px) {
             .vhl-split {
                 flex-direction: column;
+            }
+
+            .vhl-campos {
+                grid-template-columns: 1fr;
+            }
+
+            .vhl-campos-emision {
+                grid-template-columns: 1fr;
+            }
+
+            .vhl-toggle {
+                flex-direction: column;
+                gap: .75rem;
+            }
+
+            .ci-card-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .vhl-recurso {
+                flex-wrap: wrap;
+            }
+
+            .vhl-btn-buscar {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .vhl-campos-emision input {
+                font-size: .85rem;
+            }
+
+            .vhl-qr-card img {
+                width: 200px;
+                height: 200px;
             }
         }
     </style>
@@ -391,11 +610,13 @@
 
 @section('content')
     <div class="vhl-wrap">
+        <!-- TABS -->
         <div class="vhl-toggle">
             <button type="button" class="vhl-toggle-btn" id="vhl-tab-generar" data-modo="generar">GENERAR VHL</button>
             <button type="button" class="vhl-toggle-btn is-inactive" id="vhl-tab-ver" data-modo="ver">VER VHL</button>
         </div>
 
+        <!-- PANEL GENERAR -->
         <div id="vhl-panel-generar">
             <form id="vhl-form-buscar">
                 <div class="vhl-campos">
@@ -414,7 +635,9 @@
                 </div>
 
                 <div class="vhl-buscar-wrap">
-                    <button type="submit" id="vhl-boton-buscar" class="vhl-btn-buscar">BUSCAR</button>
+                    <button type="submit" id="vhl-boton-buscar" class="vhl-btn-buscar">
+                        <i class="fas fa-search"></i> BUSCAR
+                    </button>
                 </div>
             </form>
 
@@ -426,6 +649,7 @@
             </div>
         </div>
 
+        <!-- PANEL VER -->
         <div id="vhl-panel-ver" style="display: none;">
             <form id="vhl-form-validar">
                 <div class="vhl-campos">
@@ -517,7 +741,7 @@
 
             function activarTab(modo) {
                 const esGenerar = modo === 'generar';
-                tabGenerar.classList.toggle('is-inactive', ! esGenerar);
+                tabGenerar.classList.toggle('is-inactive', !esGenerar);
                 tabVer.classList.toggle('is-inactive', esGenerar);
                 panelGenerar.style.display = esGenerar ? '' : 'none';
                 panelVer.style.display = esGenerar ? 'none' : '';
@@ -554,7 +778,7 @@
                 e.preventDefault();
 
                 const bundleId = bundleIdInput.value.trim();
-                if (! bundleId) {
+                if (!bundleId) {
                     return;
                 }
 
@@ -595,9 +819,7 @@
 
             resultado.addEventListener('submit', async function (e) {
                 const form = e.target.closest('#vhl-form-generar');
-                if (! form) {
-                    return;
-                }
+                if (!form) return;
 
                 e.preventDefault();
 
@@ -655,19 +877,17 @@
                 }
             });
 
-            // --- Ver VHL: leer el QR de una imagen (en el navegador) y validarlo ---
-
             function procesarArchivo(file) {
                 qrDecodificado = null;
                 botonValidar.disabled = true;
                 fileLabel.classList.remove('is-listo', 'is-error');
 
-                if (! file) {
+                if (!file) {
                     fileNombre.textContent = 'Subir o arrastrar imagen del QR';
                     return;
                 }
 
-                if (! file.type.startsWith('image/')) {
+                if (!file.type.startsWith('image/')) {
                     fileNombre.textContent = 'Ese archivo no es una imagen.';
                     fileLabel.classList.add('is-error');
                     return;
@@ -741,10 +961,8 @@
                 }
             });
 
-            // --- Leer el QR con la cámara de la PC ---
-
             async function iniciarCamara() {
-                if (! navigator.mediaDevices || ! navigator.mediaDevices.getUserMedia) {
+                if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
                     camaraEstado.textContent = 'Este navegador no permite acceder a la cámara.';
                     return;
                 }
@@ -789,9 +1007,7 @@
             }
 
             function escanearFrame() {
-                if (! camaraStream) {
-                    return;
-                }
+                if (!camaraStream) return;
 
                 if (camaraVideo.readyState === camaraVideo.HAVE_ENOUGH_DATA) {
                     canvas.width = camaraVideo.videoWidth;
@@ -883,9 +1099,7 @@
             formValidar.addEventListener('submit', async function (e) {
                 e.preventDefault();
 
-                if (! qrDecodificado) {
-                    return;
-                }
+                if (!qrDecodificado) return;
 
                 const passCode = validarPassCode.value.trim();
                 botonValidar.disabled = true;
