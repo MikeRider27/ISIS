@@ -1,7 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(curl -v -o /dev/null http://localhost:8005/vendor/adminlte/dist/css/adminlte.min.css)"
-    ]
-  }
-}
