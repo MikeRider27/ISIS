@@ -48,4 +48,13 @@ return [
         ],
     ],
 
+    // Servicio "hcert-validator" del WHO-ITB (WorldHealthOrganization/WHO-ITB)
+    // que decodifica y valida la firma de los QR HC1 (ICVP/MEOW).
+    'who_itb' => [
+        'hcert_validator_url' => rtrim(env('WHO_ITB_HCERT_VALIDATOR_URL', 'http://host.docker.internal:8089'), '/'),
+        'gdhcn_env' => env('WHO_ITB_GDHCN_ENV', 'dev'),
+        'domain' => env('WHO_ITB_DOMAIN', 'PH4H'),
+        'usage' => env('WHO_ITB_USAGE', 'DSC'),
+    ],
+
 ];

@@ -329,6 +329,11 @@ return [
             'url' => 'meow',
             'icon' => 'fas fa-fw fa-pills',
         ],
+        [
+            'text' => 'Validar QR',
+            'url' => 'validar',
+            'icon' => 'fas fa-fw fa-shield-halved',
+        ],
     ],
 
     /*

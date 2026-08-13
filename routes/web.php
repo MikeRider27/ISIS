@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IcvpController;
 use App\Http\Controllers\MeowController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ValidarController;
 use App\Http\Controllers\VhlController;
 use App\Http\Controllers\VisorController;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/icvp/generar', [IcvpController::class, 'generar'])->name('icvp.generar');
     Route::get('/meow', [MeowController::class, 'index'])->name('meow');
     Route::post('/meow/generar', [MeowController::class, 'generar'])->name('meow.generar');
+    Route::get('/validar', [ValidarController::class, 'index'])->name('validar');
+    Route::post('/validar/verificar', [ValidarController::class, 'verificar'])->name('validar.verificar');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::match(['get', 'post'], '/logout', [LoginController::class, 'destroy'])->name('logout');
 });
