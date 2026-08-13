@@ -1,4 +1,4 @@
-# ISIS
+# IPS_VHL
 
 Aplicación Laravel para consultar, visualizar y compartir documentos de **Resumen Clínico Internacional (IPS)** integrados con el ecosistema FHIR del **MSPBS** (Ministerio de Salud Pública y Bienestar Social, Paraguay) y la red **GDHCN/RACSEL** (LACPass).
 
