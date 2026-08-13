@@ -332,7 +332,7 @@ return [
         [
             'text' => 'Validar QR',
             'url' => 'validar',
-            'icon' => 'fas fa-fw fa-shield-halved',
+            'icon' => 'fas fa-fw fa-check',
         ],
     ],
 
