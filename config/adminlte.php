@@ -319,6 +319,16 @@ return [
             'url' => 'vhl',
             'icon' => 'fas fa-fw fa-qrcode',
         ],
+        [
+            'text' => 'ICVP',
+            'url' => 'icvp',
+            'icon' => 'fas fa-fw fa-syringe',
+        ],
+        [
+            'text' => 'MEOW',
+            'url' => 'meow',
+            'icon' => 'fas fa-fw fa-pills',
+        ],
     ],
 
     /*

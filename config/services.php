@@ -39,6 +39,7 @@ return [
         'fhir_url' => env('MSPBS_FHIR_URL', 'https://fhir.mspbs.gov.py/fhir'),
         'vshc_issuance_url' => rtrim(env('MSPBS_VHL_URL', 'https://gdncn.mspbs.gov.py'), '/').'/v2/vshcIssuance',
         'vshc_validation_url' => rtrim(env('MSPBS_VHL_URL', 'https://gdncn.mspbs.gov.py'), '/').'/v2/vshcValidation',
+        'mediator_url' => rtrim(env('MSPBS_MEDIATOR_URL', 'https://fhir.mspbs.gov.py/mediator'), '/'),
 
         // Servidores FHIR permitidos para la consulta de VHL (mitiga SSRF vía
         // el campo "Servidor FHIR"): solo se puede elegir uno de estos.

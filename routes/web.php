@@ -3,6 +3,8 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ConsultaIpsController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\IcvpController;
+use App\Http\Controllers\MeowController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VhlController;
 use App\Http\Controllers\VisorController;
@@ -25,6 +27,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/vhl/buscar', [VhlController::class, 'buscar'])->name('vhl.buscar');
     Route::post('/vhl/generar', [VhlController::class, 'generar'])->name('vhl.generar');
     Route::post('/vhl/validar', [VhlController::class, 'validar'])->name('vhl.validar');
+    Route::get('/icvp', [IcvpController::class, 'index'])->name('icvp');
+    Route::post('/icvp/generar', [IcvpController::class, 'generar'])->name('icvp.generar');
+    Route::get('/meow', [MeowController::class, 'index'])->name('meow');
+    Route::post('/meow/generar', [MeowController::class, 'generar'])->name('meow.generar');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::match(['get', 'post'], '/logout', [LoginController::class, 'destroy'])->name('logout');
 });
